@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Home page</title>
+		<!-- // Material Icon CDN -->
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<!-- // Materialize CSS CDN -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
+		/>
+
+		<!-- //  font awesome link  -->
+		<link
+			href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+			rel="stylesheet"
+			integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+			crossorigin="anonymous"
+		/>
+
+		<!-- // datatable cdn-->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.datatables.net/1.10.20/css/dataTables.material.min.css"
+		/>
+
+		<!-- // Your custom styles -->
+		<link rel="stylesheet" href="./assects/styles/style.css" />
+
+		<link rel="manifest" href="manifest.json" />
+	</head>
+	<body>
+		<!-- ?  header (NAVBAR) files goes here -->
+		<header>
+			<nav class="light-blue darken-3">
+				<div class="nav-wrapper">
+					<div class="container">
+						<a href="#" class="brand-logo"
+							><b>Warehouses Managerment</b></a
+						>
+						<ul class="right">
+							<li>
+								<a href="#" data-activates="mobile-menu" class="buttons"
+									><i class="material-icons">menu</i></a
+								>
+							</li>
+						</ul>
+
+						<!-- // sidenav -->
+						<ul class="side-nav" id="mobile-menu">
+							<a class="sideli"
+								><li onclick='displaySections("addItem-d")'>
+									Add Item
+								</li></a
+							>
+							<a class="sideli"
+								><li onclick='displaySections("viewStock-d")'>
+									View Stock
+								</li></a
+							>
+							<a class="sideli"
+								><li onclick='displaySections("viewTrans-d")'>
+									View Transactions
+								</li></a
+							>
+							<a class="sideli"
+								><li onclick='displaySections("reqItem-d")'>
+									Request Products
+								</li></a
+							>
+
+							<a class="sideli"
+								><li class="center">
+									<button
+										class="btn waves-block center valign center"
+										id="logout"
+									>
+										logout
+									</button>
+								</li></a
+							>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<!-- // spinnner -->
+		<div id="spinnerDiv">
+			<img src="../assests/Spinner.gif" alt="" id="spinner" />
+		</div>
+
+		<!-- ?  main container -->
+		<main>
+			<div id="info-div">
+				<div class="container" id="addItem-d">
+					<h3 class="text-teal text-darken-3">Add Item</h3>
+					<form id="addItemForm" class="forms" style="margin-top: 50px;">
+						<div class="row">
+							<div class="input-field col s12">
+								<select name="wareSel" id="wareSel" required>
+									<option value="none" disabled selected
+										>Choose an Warehouse</option
+									>
+								</select>
+							</div>
+
+							<div class="input-field col s12">
+								<select name="storSel" id="storSel" required>
+									<option value="none" selected disabled
+										>Choose an storage space</option
+									>
+								</select>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s12">
+									<input
+										list="products"
+										name="proSel"
+										id="proSel"
+										type="text"
+									/>
+
+									<datalist id="products">
+										<option value="Safari"> </option>
+									</datalist>
+									<label for="proSel">Product</label>
+								</div>
+								<div class="input-field col s6 m6">
+									<input name="proHsn" type="number" id="proHsn" />
+									<label for="proHsn">Product HSN</label>
+								</div>
+								<div class="input-field col s6 m6">
+									<input name="proUnit" type="number" id="proUnit" />
+									<label for="proUnit"> Product Unit</label>
+								</div>
+							</div>
+							<div class="input-field col s12 m12">
+								<input name="proSku" id="proSku" type="text" />
+								<label for="proSku">Product SKU no.</label>
+							</div>
+							<div class="input-field col s12">
+								<button
+									class="btn waves-effect submitBtn"
+									type="submit"
+								>
+									Add Item
+									<i class="material-icons right">send</i>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="container" id="viewStock-d">
+					<h2 class="text-teal">Stocks</h2>
+					<div class="row">
+						<div class="input-field col s12 m12 l12">
+							<select name="wareToSel" id="wareToSel">
+								<option value="none" disabled selected
+									>Choose an Warehouse</option
+								>
+							</select>
+						</div>
+					</div>
+					<div id="tableCont" style="overflow-x: scroll;">
+						<table
+							id="stockTable"
+							class="mdl-data-table"
+							style="width: 100%;"
+						>
+							<thead>
+								<tr>
+									<th>product</th>
+									<th>hsn</th>
+									<th>units</th>
+									<th>sku code</th>
+									<th>price</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+				<div class="container" id="viewTrans-d">
+					<h2 class="text-teal">Last Transactions</h2>
+					<div class="row">
+						<div class="input-field col s12 m12 l12">
+							<select name="wareSelect" id="wareSelect">
+								<option value="none" disabled selected
+									>Choose an Warehouse</option
+								>
+							</select>
+						</div>
+					</div>
+					<div id="tableCont" style="overflow-x: scroll;">
+						<table
+							id="transTable"
+							class="mdl-data-table"
+							style="width: 100%;"
+						>
+							<thead>
+								<tr>
+									<th>product</th>
+									<th>hsn</th>
+									<th>units</th>
+									<th>sku code</th>
+									<th>price</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+				<div class="container" id="reqItem-d">
+					<form id="reqForm">
+						<div class="row">
+							<div class="input-field col 12 m12">
+								<select name="proSelect" id="proSelect">
+									<option value="none" disabled selected
+										>Choose an Product</option
+									></select
+								>
+								<label for="proSelect">Select Product</label>
+							</div>
+							<div class="input-field col 12 m12">
+								<input name="proQty" id="proQty" type="number" />
+								<label for="proQty">Quantity</label>
+							</div>
+							<div class="input-field col 12 m12">
+								<button
+									class="btn waves-effect teal"
+									type="submit"
+									style="display: block; margin: auto;"
+								>
+									Request
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</main>
+
+		<!-- ? _______ javascript files goes here ________ -->
+
+		<!-- // jQuery CDN -->
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+		<!-- // datatables jquery cdn-->
+		<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+		<!-- // datatables material cdn-->
+		<script src="https://cdn.datatables.net/1.10.20/js/dataTables.material.min.js"></script>
+
+		<!-- // Materialize JS CDN -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+		<!-- // sweet alert -->
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+		<!-- // papaparse -->
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
+
+		<!-- // qr code generator -->
+		<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+		<!--// firebase config -->
+
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+		<script>
+			// Your web app's Firebase configuration
+			var firebaseConfig = {
+				apiKey: 'AIzaSyCCqxCdHNQmvbY4r8i0G-RHMpLZED1Pu5I',
+				authDomain: 'warehouse-management-d6bc8.firebaseapp.com',
+				databaseURL: 'https://warehouse-management-d6bc8.firebaseio.com',
+				projectId: 'warehouse-management-d6bc8',
+				storageBucket: 'warehouse-management-d6bc8.appspot.com',
+				messagingSenderId: '30710000938',
+				appId: '1:30710000938:web:c28b59f17f37c365544253',
+				measurementId: 'G-Q8FFRWW0BJ',
+			};
+			// Initialize Firebase
+			firebase.initializeApp(firebaseConfig);
+			firebase.analytics();
+
+			// defining variables
+			const auth = firebase.auth();
+			const db = firebase.firestore();
+		</script>
+
+		<!-- // including all external javascript files -->
+		<script src="./assects/scripts/app.js"></script>
+
+		<script src="./assects/scripts/index.js"></script>
+		<script src="./assects/scripts/functions/addItem.js"></script>
+		<script src="./assects/scripts/functions/viewStock.js"></script>
+		<script src="./assects/scripts/functions/viewTrans.js"></script>
+		<script src="./assects/scripts/functions/reqItem.js"></script>
+	</body>
+</html>

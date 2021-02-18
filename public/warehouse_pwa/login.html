@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Home page</title>
+		<!-- // Material Icon CDN -->
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<!-- // Materialize CSS CDN -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
+		/>
+
+		<!-- //  font awesome link  -->
+		<link
+			href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+			rel="stylesheet"
+			integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+			crossorigin="anonymous"
+		/>
+
+		<!-- // datatable cdn-->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.datatables.net/1.10.20/css/dataTables.material.min.css"
+		/>
+
+		<!-- // Your custom styles -->
+		<link rel="stylesheet" href="./assects/styles/style.css" />
+	</head>
+	<body>
+		<!-- ?  header (NAVBAR) files goes here -->
+		<header>
+			<nav class="light-blue darken-3">
+				<div class="nav-wrapper">
+					<div class="container">
+						<a href="#" class="brand-logo"><b>Admin Panel</b></a>
+						<ul class="right">
+							<li>
+								<a href="#" data-activates="mobile-menu" class="buttons"
+									><i class="material-icons">menu</i></a
+								>
+							</li>
+						</ul>
+
+						<!-- // sidenav -->
+						<ul class="side-nav" id="mobile-menu">
+							<a class="sideli"
+								><li onclick='displaySections("addItem-d")'>
+									Add Item
+								</li></a
+							>
+							<a class="sideli"
+								><li onclick='displaySections("viewStock-d")'>
+									View Stock
+								</li></a
+							>
+							<a class="sideli"
+								><li onclick='displaySections("viewTrans-d")'>
+									View Transactions
+								</li></a
+							>
+							<a class="sideli"
+								><li onclick='displaySections("reqItem-d")'>
+									Request Products
+								</li></a
+							>
+
+							<a class="sideli"
+								><li class="center">
+									<button
+										class="btn waves-block center valign center"
+										id="logout"
+									>
+										logout
+									</button>
+								</li></a
+							>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<!-- // spinnner -->
+		<div id="spinnerDiv">
+			<img src="../assests/Spinner.gif" alt="" id="spinner" />
+		</div>
+
+		<!-- ?  main container -->
+		<main>
+			<div class="container" id="login-cont">
+				<form id="login-form">
+					<div class="row">
+						<div class="input-field col s12 m12 l12">
+							<input
+								type="text"
+								name="usernameInput"
+								id="username-input"
+							/>
+							<label for="username-input">
+								username
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12 m12 l12">
+							<input
+								type="password"
+								name="passwordInput"
+								id="password-input"
+							/>
+							<label for="password-input">
+								password
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12 m12">
+							<button class="btn teal waves-effect" type="submit">
+								login
+								<i class="material-icons right">send</i>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</main>
+
+		<!-- ? _______ javascript files goes here ________ -->
+
+		<!-- // jQuery CDN -->
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+		<!-- // datatables jquery cdn-->
+		<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+		<!-- // datatables material cdn-->
+		<script src="https://cdn.datatables.net/1.10.20/js/dataTables.material.min.js"></script>
+
+		<!-- // Materialize JS CDN -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+		<!-- // sweet alert -->
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+		<!-- // papaparse -->
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
+
+		<!-- // qr code generator -->
+		<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+		<!--// firebase config -->
+
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+		<script>
+			// Your web app's Firebase configuration
+			var firebaseConfig = {
+				apiKey: 'AIzaSyCCqxCdHNQmvbY4r8i0G-RHMpLZED1Pu5I',
+				authDomain: 'warehouse-management-d6bc8.firebaseapp.com',
+				databaseURL: 'https://warehouse-management-d6bc8.firebaseio.com',
+				projectId: 'warehouse-management-d6bc8',
+				storageBucket: 'warehouse-management-d6bc8.appspot.com',
+				messagingSenderId: '30710000938',
+				appId: '1:30710000938:web:c28b59f17f37c365544253',
+				measurementId: 'G-Q8FFRWW0BJ',
+			};
+			// Initialize Firebase
+			firebase.initializeApp(firebaseConfig);
+			firebase.analytics();
+
+			// defining variables
+			const auth = firebase.auth();
+			const db = firebase.firestore();
+		</script>
+
+		<!-- // including all external javascript files -->
+
+		<script src="./assects/scripts/login.js"></script>
+	</body>
+</html>

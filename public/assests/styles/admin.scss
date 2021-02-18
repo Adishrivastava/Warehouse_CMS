@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+// ? basic css here ------------------
+
+*,
+body,
+html {
+	padding: 0;
+	margin: 0;
+	font-family: 'Open sans', sans-serif;
+}
+
+//// removing all arrows from inputs
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+	-moz-appearance: textfield;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	text-align: center;
+	font-weight: bold;
+	font-family: 'Poppins', sans-serif;
+}
+
+// ? header css here ------------------
+nav {
+	.nav-wrapper {
+		.side-nav {
+			padding-top: 50px;
+			li {
+				color: black;
+				text-align: center;
+				font-weight: bold;
+				font-size: 1.2em;
+				margin-top: 20px;
+				cursor: pointer;
+				button {
+					display: block;
+					margin: auto;
+					margin-top: 50px;
+				}
+			}
+		}
+	}
+}
+
+//? spinner css
+#spinnerDiv {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.625);
+	display: none;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+	#spinner {
+		transform: scale(0.6);
+		background-color: transparent;
+	}
+}
+
+// ! ______ different components in the admin panel _____
+
+// ? main tag
+main {
+	width: 100%;
+}
+
+//// general container and form scss
+.secCont {
+	padding-top: 50px;
+	padding-bottom: 100px;
+	.forms {
+		border-radius: 5px;
+		border: 1px solid grey;
+		padding: 0 30px 0 30px;
+		width: 100%;
+		max-width: 500px;
+		display: block;
+		margin: auto;
+		.submitBtn {
+			display: block;
+			margin: auto;
+			margin-top: 20px;
+		}
+	}
+}
+
+//// general lists
+.wh-info {
+	width: 100%;
+	display: block;
+	margin: auto;
+	li {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		background-color: rgb(198, 198, 246);
+
+		.wh-n {
+			width: 30%;
+			min-width: 200px;
+			font-size: 1.2em;
+			font-weight: bold;
+			color: rgb(56, 23, 65);
+		}
+		.wh-sto {
+			width: 35%;
+			min-width: 100px;
+		}
+		.wh-d {
+			width: 35%;
+			min-width: 100px;
+		}
+	}
+}
+
+// ? -------------------
+
+#wh-f {
+	display: none;
+}
+#wh-s {
+	display: none;
+}
+#pro-v {
+	display: none;
+}
+#man-a-v {
+	display: none;
+}
+#stock-v {
+	display: none;
+}
+#trans-v {
+	display: block;
+}
+
+//? tables scss
+
+table {
+	thead {
+		background-color: rgb(8, 8, 15);
+		th {
+			color: white !important;
+			text-align: center;
+		}
+	}
+	tbody {
+		tr {
+			color: black;
+			font-weight: bold;
+			font-size: 1.2em;
+		}
+	}
+}
+
+#view-modal {
+}
+
+.tableCont {
+	overflow-x: scroll;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	width: 100% !important;
+	margin-top: 30px;
+}
+
+hr {
+	background-color: rgba(128, 128, 128, 0.486);
+	height: 1px;
+}
+
+.fixed {
+	[type='checkbox'],
+	[type='radio'] {
+		+ label {
+			pointer-events: auto;
+		}
+	}
+}
+
+.modal {
+	width: 80% !important;
+}

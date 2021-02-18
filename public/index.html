@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Admin panel</title>
+		<!-- // Material Icon CDN -->
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<!-- // Materialize CSS CDN -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
+		/>
+
+		<!-- //  font awesome link  -->
+		<link
+			href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+			rel="stylesheet"
+			integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+			crossorigin="anonymous"
+		/>
+
+		<!-- // datatable cdn-->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.datatables.net/1.10.20/css/dataTables.material.min.css"
+		/>
+
+		<!-- // Your custom styles -->
+		<link rel="stylesheet" href="./assests/styles/admin.css" />
+	</head>
+	<body>
+		<!-- ?  header (NAVBAR) files goes here -->
+		<header>
+			<nav class="light-blue darken-3">
+				<div class="nav-wrapper">
+					<div class="container">
+						<a href="#" class="brand-logo"><b>Admin Panel</b></a>
+						<ul class="right">
+							<li>
+								<a href="#" data-activates="mobile-menu" class="buttons"
+									><i class="material-icons">menu</i></a
+								>
+							</li>
+						</ul>
+						
+						<!-- // sidenav -->
+						<ul class="side-nav" id="mobile-menu">
+							<a class="sideli"><li id="wh-a-btn">ADD WAREHOUSE</li></a>
+							<a class="sideli"><li id="wh-v-btn">VIEW WAREHOUSE</li></a>
+							<a class="sideli"
+								><li id="pro-v-btn">PRODUCTS CATEGORY</li></a
+							>
+							<a class="sideli"><li id="stock-v-btn">STOCK</li></a>
+							<a class="sideli"
+								><li id="trans-v-btn">TRANSACTIONS</li></a
+							>
+						
+							<a class="sideli"><li id="man-v-btn">MANAGERS</li></a>
+
+							<a class="sideli"
+								><li class="center">
+									<button
+										class="btn waves-block center valign center"
+										id="logoutBtn"
+									>
+										logout
+									</button>
+								</li></a
+							>
+						</ul>
+					</div>
+				</div>
+				
+			</nav>
+		</header>
+
+		<!-- // spinnner -->
+		<div id="spinnerDiv">
+			<img src="./assests/Spinner.gif" alt="" id="spinner" />
+		</div>
+
+		<!-- * main container goes here -->
+		<main>
+
+			<!-- ? adding warehouses-->
+			<div class="container secCont mainCont" id="wh-f">
+				<!--  form for adding warehouse -->
+				<form id="ware-form" class="forms">
+					<h3 class="indigo-text">ADD NEW WAREHOUSE</h3>
+					<div class="row">
+						<div class="input-field col s12">
+							<input
+								type="text"
+								name="wareName"
+								id="wareName"
+								required
+							/>
+							<label for="wareName">WAREHOUSE NAME</label>
+						</div>
+						<div class="input-field col s12">
+							<input
+								type="text"
+								name="wareLocation"
+								id="wareLocation"
+								class="validate"
+								required
+							/>
+							<label for="wareLocation">LOCATION</label>
+						</div>
+						<div class="input-field col s12">
+							<textarea
+								type="text"
+								name="wareDesc"
+								id="wareDesc"
+								rows="8"
+								cols="50"
+								class="materialize-textarea"
+								placeholder="add description of the warehouse"
+							></textarea>
+							<label for="wareDesc">DESCRIPTION</label>
+						</div>
+						<div class="input-field col s12">
+							<button class="btn waves-effect submitBtn" type="submit">
+								add warehouse
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- ? viewing warehouses and adding storage space to -->
+			<div class="container mainCont" id="wh-s">
+				<!-- displaying and deleting warehouses-->
+				<h3
+					class="deep-purple-text text-darken-4"
+					
+				>
+					WAREHOUSES
+				</h3>
+				<table id="wareTable" class="mdl-data-table" style="width: 100%;">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>view</th>
+							<th>storage</th>
+							<th>delete</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+
+				<!-- //storage form modal -->
+
+				<div id="storModal" class="modal">
+					<div class="modal-content">
+						<h4 id="wh-name-s"></h4>
+						<div class="container" id="entity-det">
+							<!--  form for adding warehouse -->
+							<form id="stor-form" class="forms">
+								<div class="row">
+									<div class="input-field col s12">
+										<input
+											type="text"
+											name="storName"
+											id="storName"
+											required
+										/>
+										<label for="wareName">Storage name</label>
+									</div>
+									<div class="input-field col s12">
+										<input
+											type="text"
+											name="storLocation"
+											id="storLocation"
+											class="validate"
+											required
+										/>
+										<input
+											type="hidden"
+											name="whStor"
+											id="whStor"
+											class="validate"
+											required
+										/>
+										<label for="wareLocation">Location</label>
+									</div>
+									<div class="input-field col s12">
+										<textarea
+											type="text"
+											name="storDesc"
+											id="storDesc"
+											rows="8"
+											cols="50"
+											class="materialize-textarea"
+											placeholder="add description of the storage space"
+										></textarea>
+										<label for="wareDesc">Description</label>
+									</div>
+									<div class="input-field col s12">
+										<button
+											class="btn waves-effect submitBtn"
+											type="submit"
+										>
+											add storage
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<a
+							href="#!"
+							class="modal-close waves-effect waves-green btn-flat"
+							>Close</a
+						>
+					</div>
+				</div>
+
+				<!-- // view modal for wh -->
+				<div id="viewModal" class="modal">
+					<input type="hidden" name="whDoc" id="whDoc" />
+					<div class="modal-content">
+						<h3 id="wh-name-s2"></h3>
+
+						<!-- // storage table for-->
+						<div class="container tableCont">
+							<h4 style="text-align: left !important;">
+								Storage spaces
+							</h4>
+							<table
+								id="storTable"
+								class="mdl-data-table"
+								style="width: 100%;"
+							>
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>loc</th>
+										<th>desc</th>
+										<th>remove</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+
+						<!--// managers table for a warehouse-->
+						<!-- <div class="container tableCont">
+							<h4 style="text-align: left !important;">
+								Manager's assigned
+							</h4>
+							<table
+								id="manTable"
+								class="mdl-data-table"
+								style="width: 100%;"
+							>
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>email</th>
+										<th>mobile no.</th>
+										<th>remove</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div> -->
+					</div>
+					<div class="modal-footer">
+						<a
+							href="#!"
+							class="modal-close waves-effect waves-green btn-flat"
+							>Close</a
+						>
+					</div>
+				</div>
+			</div>
+
+			<!-- ? displaying and adding product category -->
+			<div class="container secCont mainCont" id="pro-v">
+				<h3 class="grey-text text-darken-4">PRODUCT CATEGORIES</h3>
+				<!-- // table for product category-->
+				<div class="containers" style="margin: 0; overflow-x: scroll;">
+					<table id="proCatTable" class="mdl-data-table" style="width: 100%;">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>hsn code</th>
+								<th>unit</th>
+								<th>remove</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+
+				<hr>
+
+				<h4>ADD PRODUCT CATEGORY</h4>
+
+				<!-- // form for adding product category -->
+				<form id="proCat-form" class="forms" style="margin-top: 50px;">
+				
+					<div class="row">
+						<div class="input-field col s12">
+							<input
+								type="text"
+								name="proCatName"
+								id="proCatName"
+								required
+							/>
+							<label for="proCatName">Product category name</label>
+						</div>
+						<div class="input-field col s12">
+							<input
+								type="number"
+								name="proCatHsn"
+								id="proCatHsn"
+								class="validate"
+								required
+							/>
+
+							<label for="proCatHsn">HSN CODE</label>
+						</div>
+						<div class="input-field col s12">
+							<input
+								type="text"
+								name="proCatUnit"
+								id="proCatUnit"
+								class="validate"
+								required
+							></input>
+							<label for="proCatUnit">Unit</label>
+						</div>
+						<div class="input-field col s12">
+							<button class="btn waves-effect submitBtn" type="submit">
+							 ADD
+							 <i class="material-icons right">send</i>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- ? adding stock table -->
+			<div class="container mainCont" id="stock-v">
+				<h3 class="grey-text text-darken-4">Stock Data</h3>
+				<!-- // table for product category-->
+				<div class="containers" style="margin: 0; overflow-x: scroll;">
+					<table id="stockTable" class="mdl-data-table" style="width: 100%;">
+						<thead>
+							<tr>
+								<th>Product</th>
+								<th>Product Category</th>
+								<th>hsn code</th>
+								<th>unit</th>
+								<th>Qty</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+
+				<hr>
+
+				<h4>Add Stock Data</h4>
+
+				<!-- // form for adding product category -->
+				<form id="stockAddForm" class="forms" style="margin-top: 50px;">
+				
+					<div class="row">
+						<div class="input-field col s12">
+							<select name="wareSel" id="wareSel" required>
+								<option value="none" disabled selected
+									>Choose an category</option
+								>
+							</select>
+							<label for="wareSel">Select a warehouse</label>
+						</div>
+						<div class="input-field col s12">
+							<input
+								type="file"
+								name="stockCsv"
+								id="stockCsv"
+								required
+							/>
+							<label for="stockCsv">only csv file accepted :</label>
+						</div>
+				
+						<div class="input-field col s12">
+							<button class="btn waves-effect submitBtn" type="submit">
+							 ADD
+							 <i class="material-icons right">send</i>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- ? transaction report -->
+			<div class="container" id="trans-v">	
+				<h3 class="grey-text text-darken-4">Transactions</h3>
+
+				<!-- // table for transactions-->
+				<div class="containers" style="margin: 0; overflow-x: scroll;">
+					<table id="transTable" class="mdl-data-table" style="width: 100%;">
+						<thead>
+							<tr>
+								<th>Product</th>
+								<th>Product Category</th>
+								<th>Qty</th>
+								<th>Price</th>
+								<th>Date-Time</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+
+				<hr>
+				
+				<!-- // table for transactions-->
+				<div class="containers" style="margin: 0; overflow-x: scroll; padding-top: 20px;">
+					<h3>Requests for Products</h3>
+					<table id="reqTable" class="mdl-data-table" style="width: 100%;">
+						<thead>
+							<tr>
+								<th>Product</th>
+								<th>manager</th>
+								<th>Qty</th>
+								</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- ? managers container -->
+			<div class="container" id="man-a-v">
+				<div class="secCont">
+					<h4 class="teal-text">Managers Info</h4>
+					<div id="tableCont" style="overflow-x: scroll;">
+						<table
+							id="mansTable"
+							class="mdl-data-table"
+							style="width: 100%;"
+						>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>email</th>
+									<th>mobile</th>				
+									<th>Details</th>
+									<th>remove</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					
+					<!-- // adding mans form-->
+					<form id="manAddForm" style="padding: 50px;">
+						<h4 class="teal-text">Add Managers</h4>
+						<div class="row">
+							<div class="input-field col s12 m12">
+								<input
+									type="text"
+									id="manNameInp"
+									name="manNameInp"
+									required
+								/>
+								<label for="manNameInp">Name</label>
+							</div>
+							<div class="input-field col s12 m12">
+								<input
+									type="email"
+									id="manEmailInp"
+									name="manEmailInp"
+									required
+								/>
+								<label for="manEmailInp">Email</label>
+							</div>
+							<div class="input-field col s12 m12">
+								<input
+									type="number"
+									id="manMobileInp"
+									name="manMobileInp"
+									required
+								/>
+								<label for="manMobileInp">Mobile</label>
+							</div>
+							<div class="input-field col s12 m12">
+								<input
+									type="password"
+									id="manPasswordInp"
+									name="manPasswordInp"
+									required
+								/>
+								<label for="manPasswordInp">Password</label>
+							</div>
+						
+							<div class="input-field col s12">
+								<button
+									class="btn waves-effect"
+									type="submit"
+									style="display: block; margin: auto;"
+								>
+									Add Manager
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+					<!-- // Modal Structure -->
+				<div id="modal2" class="modal">
+					<div class="modal-content">
+						<h4>Warehouses Assigned</h4>
+						<ul class="collection" id="warehousesList">
+							
+						</ul>
+
+						<h4 class="cyan-text" style="padding-top: 20px;">
+							Add Warehouses
+						</h4>
+						<form id="assWareForm">
+							<div class="row">
+								<div style="padding: 20px;" id="manWareAdd"></div>
+								<!-- // hidden input for id -->
+								<input
+									type="hidden"
+									name="manId"
+									id="manId"
+									value=""
+								/>
+								<div class="input-field col s12 m12 l12">
+									<button
+										class="btn waves-effect"
+										style="display: block; margin: auto;"
+										type="submit"
+									>
+										ADD <i class="material-icons">send</i>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<a
+							href="#!"
+							class="modal-close waves-effect waves-green btn-flat"
+							>Close</a
+						>
+					</div>
+				</div>
+			</div>
+		
+		</main>
+
+		<!-- ? _______ javascript files goes here ________ -->
+
+		<!-- // jQuery CDN -->
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+		<!-- // datatables jquery cdn-->
+		<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+		<!-- // datatables material cdn-->
+		<script src="https://cdn.datatables.net/1.10.20/js/dataTables.material.min.js"></script>
+
+		<!-- // Materialize JS CDN -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+		<!-- // sweet alert -->
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+		<!-- // papaparse -->
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
+
+		<!-- // qr code generator -->
+		<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+		<!--// firebase config -->
+
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+		<script>
+			// Your web app's Firebase configuration
+			var firebaseConfig = {
+				apiKey: 'AIzaSyCCqxCdHNQmvbY4r8i0G-RHMpLZED1Pu5I',
+				authDomain: 'warehouse-management-d6bc8.firebaseapp.com',
+				databaseURL: 'https://warehouse-management-d6bc8.firebaseio.com',
+				projectId: 'warehouse-management-d6bc8',
+				storageBucket: 'warehouse-management-d6bc8.appspot.com',
+				messagingSenderId: '30710000938',
+				appId: '1:30710000938:web:c28b59f17f37c365544253',
+				measurementId: 'G-Q8FFRWW0BJ',
+			};
+			// Initialize Firebase
+			firebase.initializeApp(firebaseConfig);
+			firebase.analytics();
+
+			// defining variables
+			const auth = firebase.auth();
+			const db = firebase.firestore();
+		</script>
+
+		<!-- // including all external javascript files -->
+		<script src="./assests/scripts/admin/auth.js"></script>
+		<script src="./assests/scripts/admin/main.js"></script>
+		<script src="./assests/scripts/admin/ware-add.js"></script>
+		<script src="./assests/scripts/admin/warehouses/warehouses.js"></script>
+		<script src="./assests/scripts/admin/warehouses/sto_man.js"></script>
+		<script src="./assests/scripts/admin/proCat.js"></script>
+		<script src="./assests/scripts/admin/managers.js"></script>
+		<script src="./assests/scripts/admin/stocks.js"></script>
+		<script src="./assests/scripts/admin/transaction.js"></script>
+	</body>
+</html>

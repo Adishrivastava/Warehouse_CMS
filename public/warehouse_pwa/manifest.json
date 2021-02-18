@@ -1,0 +1,53 @@
+{
+	"name": "warehouse management",
+	"short_name": "warehouses",
+	"theme_color": "#1e0703",
+	"background_color": "#5d3805",
+	"display": "standalone",
+	"orientation": "portrait",
+	"Scope": "/",
+	"start_url": "/warehouse_pwa/",
+	"icons": [
+		{
+			"src": "assects/images/icons/warehouse-72x72.png",
+			"sizes": "72x72",
+			"type": "image/png"
+		},
+		{
+			"src": "assects/images/icons/warehouse-96x96.png",
+			"sizes": "96x96",
+			"type": "image/png"
+		},
+		{
+			"src": "assects/images/icons/warehouse-128x128.png",
+			"sizes": "128x128",
+			"type": "image/png"
+		},
+		{
+			"src": "assects/images/icons/warehouse-144x144.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		},
+		{
+			"src": "assects/images/icons/warehouse-152x152.png",
+			"sizes": "152x152",
+			"type": "image/png"
+		},
+		{
+			"src": "assects/images/icons/warehouse-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "assects/images/icons/warehouse-384x384.png",
+			"sizes": "384x384",
+			"type": "image/png"
+		},
+		{
+			"src": "assects/images/icons/warehouse-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"splash_pages": null
+}
